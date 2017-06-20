@@ -25,13 +25,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = mNameEditText.getText().toString();
-                startStory();
+                startStory(name);
             }
         });
     }
 
-    private void startStory() {
+    private void startStory(String name) {
         Intent intent = new Intent(MainActivity.this, StoryActivity.class);
+        intent.putExtra("name", name);
         startActivity(intent);
     }
 }
