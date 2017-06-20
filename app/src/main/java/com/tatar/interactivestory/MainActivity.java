@@ -1,5 +1,6 @@
 package com.tatar.interactivestory;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -24,9 +25,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = mNameEditText.getText().toString();
-
-                Toast.makeText(MainActivity.this, "user name: " + name, Toast.LENGTH_SHORT).show();
+                startStory();
             }
         });
+    }
+
+    private void startStory() {
+        Intent intent = new Intent(MainActivity.this, StoryActivity.class);
+        startActivity(intent);
     }
 }
