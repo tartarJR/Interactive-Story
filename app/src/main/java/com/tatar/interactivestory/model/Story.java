@@ -15,7 +15,7 @@ public class Story {
 
         pages[0] = new Page(R.drawable.page0, R.string.page0,
                 new Choice(R.string.page0_choice1, 1),
-                new Choice(R.string.page0_choice1, 2));
+                new Choice(R.string.page0_choice2, 2));
 
         pages[1] = new Page(R.drawable.page1,
                 R.string.page1,
@@ -40,5 +40,14 @@ public class Story {
         pages[5] = new Page(R.drawable.page5, R.string.page5);
 
         pages[6] = new Page(R.drawable.page6, R.string.page6);
+    }
+
+    public Page getPage(int pageNumber) {
+
+        if (pageNumber >= pages.length) {
+            pageNumber = 0;
+        }
+
+        return pages[pageNumber];
     }
 }
