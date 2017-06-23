@@ -2,10 +2,9 @@ package com.tatar.interactivestory.ui;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,19 +14,21 @@ import com.tatar.interactivestory.R;
 import com.tatar.interactivestory.model.Page;
 import com.tatar.interactivestory.model.Story;
 
-import static android.R.attr.name;
+import java.util.Stack;
 
 public class StoryActivity extends AppCompatActivity {
 
     private static final String TAG = StoryActivity.class.getSimpleName();
 
     private String name;
-
     private Story story;
+
     private ImageView storyImageView;
     private TextView storyTextView;
     private Button choice1Button;
     private Button choice2Button;
+
+    private Stack<Integer> pageStack = new Stack<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,20 @@ public class StoryActivity extends AppCompatActivity {
         loadPage(0);
     }
 
+    @Override
+    public void onBackPressed() {
+        pageStack.pop();
+        if (pageStack.isEmpty()) {
+            super.onBackPressed();
+        } else {
+            loadPage(pageStack.pop());
+        }
+    }
+
     private void loadPage(int pageNumber) {
+
+        pageStack.push(pageNumber);
+
         final Page page = story.getPage(pageNumber);
 
         Drawable image = ContextCompat.getDrawable(StoryActivity.this, page.getImageId());
